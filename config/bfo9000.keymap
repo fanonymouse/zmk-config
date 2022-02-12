@@ -13,6 +13,8 @@
 
 #define DEFAULT 0
 #define LOWER   1
+#define RAISE   2
+#define ADJUST  3
 
 / {
 	keymap {
@@ -26,22 +28,38 @@
 			// | Pg Dn | Up     | Shift | Z    | X   | C   | V   | B   | N     | B      | N   | M   | ,   | .   | /    | Shift | Up    |        |
 			// | Left  | Dn     | Right | Ctrl | Alt | Win | Spc | Spc | Enter | Bk Spc | Spc | Spc | Win | Alt | Ctrl | Left  | Dn    | Right  |
 			bindings = <
-			&kp ESC   &kp C_VOL_UP &kp ESC   &kp F1    &kp F2   &kp F3    &kp F4    &kp F5    &kp F6    &kp F5     &kp F6    &kp F7    &kp F8    &kp F9   &kp F10   &kp F11   &kp F12   &kp DEL
-			&kp HOME  &kp C_VOL_DN &kp GRAVE &kp N1    &kp N2   &kp N3    &kp N4    &kp N5    &kp N6    &kp N5     &kp N6    &kp N7    &kp N8    &kp N9   &kp N0    &kp MINUS &kp EQUAL &kp BSPC
-			&kp END   &kp TAB      &kp TAB   &kp Q     &kp W    &kp E     &kp R     &kp T     &kp Y     &kp T      &kp Y     &kp U     &kp I     &kp O    &kp P     &kp LBKT  &kp RBKT  &kp BSLH
-			&kp PG_UP &kp CAPS     &kp LCTRL &kp A     &kp S    &kp D     &kp F     &kp G     &kp H     &kp G      &kp H     &kp J     &kp K     &kp L    &kp SEMI  &kp APOS  &kp ENTER &kp ENTER
-			&kp PG_DN &kp UP       &kp LSHFT &kp Z     &kp X    &kp C     &kp V     &kp B     &kp N     &kp B      &kp N     &kp M     &kp COMMA &kp DOT  &kp SLASH &kp RSHFT &kp UP    &mo LOWER
-			&kp LEFT  &kp DOWN     &kp RIGHT &kp LCTRL &kp LALT &kp LMETA &kp SPACE &kp SPACE &kp ENTER &kp BSPC   &kp SPACE &kp SPACE &kp RMETA &kp RALT &kp RCTRL &kp LEFT  &kp DOWN  &kp RIGHT
+			&kp GRAVE  &kp ESC    &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &trans     &trans     &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &kp BSPC   &kp DEL    &trans     &trans       
+			&kp HOME   &kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T      &trans     &trans     &kp Y      &kp U      &kp I      &kp O      &kp P      &kp MINUS  &kp EQUAL  &trans     &trans       
+			&kp END    &kp CAPS   &kp A      &kp S      &kp D      &kp F      &kp G      &trans     &trans     &kp H      &kp J      &kp K      &kp L      &kp SEMI   &kp APOS   &kp ENTER  &trans     &trans       
+			&kp PG_UP  &kp LSHFT  &kp Z      &kp X      &kp C      &kp V      &kp B      &trans     &trans     &kp N      &kp M      &kp COMMA  &kp DOT    &kp SLASH  &kp UP     &kp C_PLAY &trans     &trans       
+			&kp PG_DN  &kp LCTRL  &kp LMETA  &kp LALT   &mo LOWER  &kp SPACE  &kp SPACE  &trans     &trans     &kp SPACE  &kp SPACE  &mo RAISE  &kp RCTRL  &kp LEFT   &kp DOWN   &kp RIGHT  &trans     &trans       
+			&trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans       
 			>;
 		};
 
 		lower_layer {
-			// | | | | | | | | | | | | | | | | | | |
-			// | | | | | | | | | | | | | | | | | | |
-			// | | | | | | | | | | | | | | | | | | |
-			// | | | | | | | | | | | | | | | | | | |
-			// | | | | | | | | | | | | | | | | | | |
-			// | | | | | | | | | | | | | | | | | | |
+			bindings = <
+			&trans     &kp F1     &kp F2     &kp F3     &kp F4     &kp F5     &kp F6     &trans     &trans     &kp F7     &kp F8     &kp F9     &kp F10    &kp F11    &kp F12         &kp PIPE      &trans     &trans 
+			&trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &kp KP_N7  &kp KP_N8  &kp KP_N9  &kp LBRC        &kp RBRC      &trans     &trans 
+			&trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &kp KP_N4  &kp KP_N5  &kp KP_N6  &kp KP_MULTIPLY &kp KP_DIVIDE &trans     &trans
+			&trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp KP_PLUS     &kp KP_MINUS  &trans     &trans
+			&trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &mo ADJUST &kp KP_N0  &kp KP_DOT &trans          &trans        &trans     &trans
+			&trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans          &trans        &trans     &trans
+			>;
+		};
+		
+		raise_layer {
+			bindings = <
+			&bt BT_CLR       &bt BT_SEL 0      &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_SEL 5 &trans     &trans     &trans     &trans     &trans     &trans     &trans     &kp BSLH   &trans     &trans     &trans
+			&out OUT_USB     &out OUT_BLE      &trans       &trans       &trans       &trans       &trans       &trans     &trans     &trans     &trans     &trans     &trans     &trans     &kp LBKT   &kp RBKT   &trans     &trans 
+			&ext_power EP_ON &ext_power EP_OFF &trans       &trans       &trans       &trans       &trans       &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans
+			&reset           &bootloader       &trans       &trans       &trans       &trans       &trans       &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans       
+			&trans           &trans            &trans       &trans       &mo ADJUST   &trans       &trans       &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans       
+			&trans           &trans            &trans       &trans       &trans       &trans       &trans       &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans
+			>;
+		};
+		
+		adjust_layer {
 			bindings = <
 			&bt BT_CLR       &bt BT_SEL 0      &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &bt BT_SEL 5 &bt BT_SEL 6 &bt BT_SEL 7 &bt BT_CLR       &bt BT_SEL 0      &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &bt BT_SEL 5 &bt BT_SEL 6 &bt BT_SEL 7
 			&out OUT_USB     &out OUT_BLE      &trans          &trans          &trans          &trans          &trans       &trans       &trans       &out OUT_USB     &out OUT_BLE      &trans          &trans          &trans          &trans          &trans       &trans       &trans
